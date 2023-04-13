@@ -1,0 +1,11 @@
+FROM node:19-alpine
+WORKDIR /app
+RUN npm install -g serve
+COPY package*.json .
+RUN npm install --omit=dev
+ADD public ./public
+ADD src ./src
+ADD .env ./
+RUN npm run build
+EXPOSE 80
+CMD serve -s build -l 80

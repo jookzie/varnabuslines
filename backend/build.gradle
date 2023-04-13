@@ -1,0 +1,70 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.3'
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+	id 'java'
+	id 'application'
+  	id "org.sonarqube" version "3.4.0.2513"
+	id 'jacoco'
+	id "org.owasp.dependencycheck" version "7.4.1"
+}
+jacocoTestReport {
+	reports {
+		xml.enabled true
+	}
+}
+sonarqube {
+  properties {
+    property "sonar.projectKey", "I478158_s3-indiv_AYQp36_tZdf_8-1F-JtD"
+    property "sonar.qualitygate.wait", true 
+  }
+}
+
+group = 'com.varnabuslines'
+version = '0.1'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'org.springframework.security:spring-security-crypto'
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	implementation 'org.modelmapper:modelmapper:3.1.0'
+	implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
+	implementation 'mysql:mysql-connector-java:8.0.30'
+	implementation 'commons-validator:commons-validator:1.7'
+
+
+	testImplementation 'com.h2database:h2:2.1.214'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testImplementation 'org.projectlombok:lombok:1.18.24'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+	annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+mainClassName = 'com.varnabuslines.VarnabuslinesApplication'

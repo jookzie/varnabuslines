@@ -1,0 +1,72 @@
+# For production use
+# Run all by executing: docker compose -f docker-compose.prod.yml up
+version: "3.9"
+services:
+  backend:
+    container_name: backend
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+      # TODO: use docker secret
+        - MYSQL_HOST=mysql:3306
+        - MYSQL_SCHEMA=mockdb
+        - MYSQL_USER=root
+        - MYSQL_PASSWORD=mockpass
+    ports:
+      - 8080:8080
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - mysql
+    links:
+      - mysql
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    ports:
+      - 80:80
+    networks:
+      - frontend
+
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    environment:
+      - MYSQL_DATABASE=mockdb
+      - MYSQL_ROOT_PASSWORD=mockpass
+    ports:
+      - 3306:3306
+    networks:
+      - backend
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8081:80
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=mockpass
+      - PMA_ARBITRARY=1
+    networks:
+      - backend
+    logging:
+      driver: none
+
+volumes:
+  mysql-data:
+
+networks:
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge
