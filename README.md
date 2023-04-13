@@ -6,6 +6,7 @@ The current state of the project is unfinished, however its aim was for me to le
 - Java
 - Spring framework
 - Maven/Gradle
+- Hibernate (ORM)
 - Javascript
 - React.js
 - UI/UX development
