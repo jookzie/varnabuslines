@@ -1,4 +1,7 @@
 # Varna Buslines
+<img src="./demo/home.jpg"/>
+<img src="./demo/lines.jpg"/>
+
 The following project was my Semester 3 assignment - to build a full stack application. 
 In other words, a replica of the existing system here: [https://varnatraffic.com](https://varnatraffic.com/en).
 You can learn more about it from the [documentation available](./project/doc/).
@@ -72,11 +75,15 @@ You can find further information about the fundamentals with the provided docume
 - Token-based authentication & authorization
 - WebSockets support
 - A real world map overview using Leaflet + OpenStreetMap
-- Excellent performance, according to the [Google Lighthouse report](./doc/Performance%20report.pdf)
 - [CI/CD pipeline](./doc/Pipeline%20diagram.png) with SonarQube quality assurance
 - [Password hashing using Argon2](https://www.password-hashing.net/)
 - Database persistence using an ORM (MySQL + Hibernate)
 - Frontend and backend testing
+
+# Features to be added
+- Real world integration
+- Route advisor
+- TypeScript rewrite
 
 # Build instructions
 1. Clone the repository with git:
